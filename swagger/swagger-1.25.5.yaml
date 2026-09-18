@@ -1,0 +1,3759 @@
+openapi: 3.0.3
+info:
+  title: KioskOS Backend API
+  version: '1.25.5'
+  description: The API exposes kiosk
+    configuration, hardware control, networking, audio/TTS, transactions, fiscal/terminal operations, Android TV control, file management, QR
+    scanner events, licensing and reverse-support functionality. PosnetServer and IngenicoServer proxy subpaths are intentionally described as
+    transparent downstream proxies because their detailed schemas are implemented by the downstream services.
+servers:
+- url: http://localhost:8080
+  description: Local kiosk backend (default port from server.py)
+tags:
+- name: General
+- name: Configuration
+- name: System administration
+- name: System & diagnostics
+- name: Kiosk
+- name: Display
+- name: Network
+- name: Bluetooth
+- name: Audio & TTS
+- name: Transactions
+- name: PayNow
+- name: POSNETServer proxy
+- name: IngenicoServer proxy
+- name: Reverse proxy & support
+- name: Android TV
+- name: Files & resources
+- name: QR scanner
+- name: License
+paths:
+  /api/posnetserver/{path}:
+    get:
+      tags:
+      - POSNETServer proxy
+      summary: Posnet proxy
+      description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
+      operationId: posnet_proxy_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    post:
+      tags:
+      - POSNETServer proxy
+      summary: Posnet proxy
+      description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
+      operationId: posnet_proxy_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    put:
+      tags:
+      - POSNETServer proxy
+      summary: Posnet proxy
+      description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
+      operationId: posnet_proxy_put
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    delete:
+      tags:
+      - POSNETServer proxy
+      summary: Posnet proxy
+      description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
+      operationId: posnet_proxy_delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+    patch:
+      tags:
+      - POSNETServer proxy
+      summary: Posnet proxy
+      description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
+      operationId: posnet_proxy_patch
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    options:
+      tags:
+      - POSNETServer proxy
+      summary: Posnet proxy
+      description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
+      operationId: posnet_proxy_options
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+
+  /api/ingenicoserver/{path}:
+    get:
+      tags:
+      - IngenicoServer proxy
+      summary: Ingenico proxy
+      description: Transparent proxy for the local IngenicoServer service. The path after `/api/ingenicoserver/` is forwarded to IngenicoServer.
+      operationId: ingenico_proxy_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    post:
+      tags:
+      - IngenicoServer proxy
+      summary: Ingenico proxy
+      description: Transparent proxy for the local IngenicoServer service. The path after `/api/ingenicoserver/` is forwarded to IngenicoServer.
+      operationId: ingenico_proxy_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    put:
+      tags:
+      - IngenicoServer proxy
+      summary: Ingenico proxy
+      description: Transparent proxy for the local IngenicoServer service. The path after `/api/ingenicoserver/` is forwarded to IngenicoServer.
+      operationId: ingenico_proxy_put
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    delete:
+      tags:
+      - IngenicoServer proxy
+      summary: Ingenico proxy
+      description: Transparent proxy for the local IngenicoServer service. The path after `/api/ingenicoserver/` is forwarded to IngenicoServer.
+      operationId: ingenico_proxy_delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    patch:
+      tags:
+      - IngenicoServer proxy
+      summary: Ingenico proxy
+      description: Transparent proxy for the local IngenicoServer service. The path after `/api/ingenicoserver/` is forwarded to IngenicoServer.
+      operationId: ingenico_proxy_patch
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    options:
+      tags:
+      - IngenicoServer proxy
+      summary: Ingenico proxy
+      description: Transparent proxy for the local IngenicoServer service. The path after `/api/ingenicoserver/` is forwarded to IngenicoServer.
+      operationId: ingenico_proxy_options
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+
+  /api/paynow/orders/{orderID}/capture:
+    post:
+      tags:
+      - PayNow
+      summary: Capture order route
+      description: Captures a PayNow order and marks the corresponding kiosk payment as processed.
+      operationId: capture_order_route_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+        '500':
+          description: PayNow operation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      parameters:
+      - name: orderID
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '123456'
+  /api/paynow/orders:
+    post:
+      tags:
+      - PayNow
+      summary: Create order route
+      description: Creates a PayNow payment order and stores the kiosk cart against the returned payment ID.
+      operationId: create_order_route_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+        '500':
+          description: PayNow operation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+  /api/change-pin:
+    post:
+      tags:
+      - General
+      summary: Change pin
+      description: Changes the local kiosk administration PIN.
+      operationId: change_pin_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePinRequest'
+  /api/system-info:
+    get:
+      tags:
+      - System & diagnostics
+      summary: System info
+      description: Returns RAM, disk, CPU and CPU-temperature information.
+      operationId: system_info_get
+      responses:
+        '200':
+          description: System information
+          content:
+            application/json:
+              example:
+                ram_total_mb: 4096
+                ram_free_mb: 2048
+                ram_used_percent: 50.0
+                disk_total_gb: 32
+                disk_free_gb: 20
+                disk_usage_percent: 37.5
+                cpu_count: 4
+                cpu_usage_percent: 12.3
+                cpu_temp: 54.3
+  /api/usb-devices:
+    get:
+      tags:
+      - General
+      summary: Usb devices
+      description: Lists detected serial/USB devices exposed as ttyUSB, ttyACM or ttyS devices.
+      operationId: usb_devices_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/reset-defaults:
+    post:
+      tags:
+      - System administration
+      summary: Reset defaults
+      description: Removes the kiosk configuration directory so configuration can be recreated from defaults.
+      operationId: reset_defaults_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+        '500':
+          description: Local system operation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/device/turn-off:
+    post:
+      tags:
+      - System administration
+      summary: Turn off
+      description: Shuts down the kiosk using the local shutdown script.
+      operationId: turn_off_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+        '500':
+          description: Local system operation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/device/reboot:
+    post:
+      tags:
+      - System administration
+      summary: Device reboot
+      description: Reboots the kiosk device.
+      operationId: device_reboot_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+        '500':
+          description: Local system operation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/device/restart-ui:
+    post:
+      tags:
+      - System administration
+      summary: Device restart ui
+      description: Immediately restarts the kiosk UI.
+      operationId: device_restart_ui_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+        '500':
+          description: Local system operation failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/device/restart-ui-schedule:
+    post:
+      tags:
+      - System administration
+      summary: Restart ui schedule
+      description: Schedules a kiosk UI restart after the requested number of seconds.
+      operationId: restart_ui_schedule_post
+      responses:
+        '200':
+          description: Restart scheduled
+          content:
+            application/json:
+              example:
+                ok: true
+                scheduled_in: 30
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestartUiRequest'
+  /api/device/logs/webview:
+    post:
+      tags:
+      - System administration
+      summary: Get webview logs
+      description: Returns the collected WebView log.
+      operationId: get_webview_logs_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/device/logs/chromium:
+    post:
+      tags:
+      - System administration
+      summary: Get chromium logs
+      description: Returns the collected Chromium log.
+      operationId: get_chromium_logs_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/test-communication:
+    get:
+      tags:
+      - General
+      summary: Test communication
+      description: Runs the backend communication test.
+      operationId: test_communication_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/resources/{filename}:
+    get:
+      tags:
+      - Files & resources
+      summary: Serve resource
+      description: Serves a resource from the kiosk resource area.
+      operationId: serve_resource_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: width
+        in: query
+        required: false
+        schema:
+          type: integer
+  /api/test-registration:
+    get:
+      tags:
+      - General
+      summary: Test registration
+      description: Runs the registration test against the configured registration service.
+      operationId: test_registration_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/settings-update-key:
+    post:
+      tags:
+      - General
+      summary: Settings update key
+      description: Updates one configuration value identified by a dotted configuration path.
+      operationId: settings_update_key_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettingsUpdateKeyRequest'
+  /api/device-id:
+    get:
+      tags:
+      - System administration
+      summary: Get device id
+      description: Returns the kiosk device identifier.
+      operationId: get_device_id_get
+      responses:
+        '200':
+          description: Device identifier
+          content:
+            application/json:
+              example:
+                device_id: ABCD1234EFGH5678
+    post:
+      tags:
+      - System administration
+      summary: Regenerate device id
+      description: Generates and stores a new kiosk device identifier.
+      operationId: regenerate_device_id_post
+      responses:
+        '200':
+          description: New device identifier
+          content:
+            application/json:
+              example:
+                device_id: ABCD1234EFGH5678
+  /api/security-key:
+    post:
+      tags:
+      - General
+      summary: Update security key
+      description: Stores the kiosk security key.
+      operationId: update_security_key_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityKeyRequest'
+  /api/mouse-cursor:
+    post:
+      tags:
+      - General
+      summary: Update mouse cursor
+      description: Enables or disables mouse-cursor display.
+      operationId: update_mouse_cursor_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MouseCursorRequest'
+  /api/advanced/support-alt-host:
+    post:
+      tags:
+      - System administration
+      summary: Save alt support host
+      description: Stores an alternative support host.
+      operationId: save_alt_support_host_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupportHostRequest'
+  /api/advanced/yaml:
+    get:
+      tags:
+      - System administration
+      summary: Get yaml
+      description: Returns the IngenicoServer YAML configuration.
+      operationId: get_yaml_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+    post:
+      tags:
+      - System administration
+      summary: Save yaml
+      description: Overwrites the IngenicoServer YAML configuration with supplied text.
+      operationId: save_yaml_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextConfigRequest'
+  /api/advanced/json:
+    get:
+      tags:
+      - System administration
+      summary: Get json
+      description: Returns the PosnetServer JSON configuration.
+      operationId: get_json_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+    post:
+      tags:
+      - System administration
+      summary: Save json
+      description: Overwrites the PosnetServer JSON configuration with supplied text.
+      operationId: save_json_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextConfigRequest'
+  /api/kiosk-nat/status:
+    get:
+      tags:
+      - Kiosk
+      summary: Kiosk nat status
+      description: Returns the current kiosk NAT configuration status.
+      operationId: kiosk_nat_status_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/kiosk-nat/on:
+    post:
+      tags:
+      - Kiosk
+      summary: Kiosk nat on
+      description: Enables kiosk NAT.
+      operationId: kiosk_nat_on_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+  /api/kiosk-nat/off:
+    post:
+      tags:
+      - Kiosk
+      summary: Kiosk nat off
+      description: Disables kiosk NAT.
+      operationId: kiosk_nat_off_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+  /api/services-status:
+    get:
+      tags:
+      - System & diagnostics
+      summary: Services status
+      description: Returns the status of configured backend services.
+      operationId: services_status_get
+      responses:
+        '200':
+          description: Service statuses
+          content:
+            application/json:
+              example:
+                services:
+                - name: posnetserver
+                  status: running
+                - name: ingenicoserver
+                  status: running
+  /api/advanced/cmd:
+    post:
+      tags:
+      - System administration
+      summary: Run cmd
+      description: Executes a command only when its base command is in the backend allow-list.
+      operationId: run_cmd_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+  /api/test-url:
+    post:
+      tags:
+      - General
+      summary: Test url
+      description: Tests whether a supplied HTTP(S) URL is reachable and whether it exposes the kiosk settings page.
+      operationId: test_url_post
+      responses:
+        '200':
+          description: URL test result
+          content:
+            application/json:
+              example:
+                ok: true
+                status: 200
+                settings_link_found: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestUrlRequest'
+  /api/info:
+    get:
+      tags:
+      - System & diagnostics
+      summary: Info
+      description: Returns hostname, local IP addresses, MAC address and detected Ethernet interface.
+      operationId: info_get
+      responses:
+        '200':
+          description: Network/system identity
+          content:
+            application/json:
+              example:
+                hostname: kiosk-001
+                ip: 192.168.1.20
+                mac: AA:BB:CC:DD:EE:FF
+                wlan0: 192.168.1.21
+                eth0: 192.168.1.20
+                eth1: ''
+                ethernet_iface: eth0
+  /api/health/protect-mode:
+    get:
+      tags:
+      - System & diagnostics
+      summary: Protect mode health
+      description: Analyzes kiosk protected/overlay mode health.
+      operationId: protect_mode_health_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/health/chromium-gpu:
+    get:
+      tags:
+      - System & diagnostics
+      summary: Chromium gpu health
+      description: Analyzes Chromium GPU process health.
+      operationId: chromium_gpu_health_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/health/chromium:
+    get:
+      tags:
+      - System & diagnostics
+      summary: Chromium health
+      description: Analyzes Chromium process health.
+      operationId: chromium_health_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/monitoring-status:
+    get:
+      tags:
+      - System & diagnostics
+      summary: Get monitoring status
+      description: Returns monitoring information for PosnetServer and IngenicoServer, including heartbeat, device and license checks.
+      operationId: get_monitoring_status_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/reset-cached-kiosk-settings:
+    post:
+      tags:
+      - System administration
+      summary: Reset cached kiosk settings
+      description: Clears the cached B2B kiosk configuration.
+      operationId: reset_cached_kiosk_settings_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+  /api/kiosk-settings:
+    get:
+      tags:
+      - Kiosk
+      summary: Get kiosk settings
+      description: Returns kiosk UI settings resolved for the currently configured kiosk mode.
+      operationId: get_kiosk_settings_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/app-settings:
+    get:
+      tags:
+      - Configuration
+      summary: Get app settings
+      description: Returns application settings. When authenticated, sensitive BLIK credentials are retained; otherwise they are removed from
+        the response.
+      operationId: get_app_settings_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      security:
+      - BearerAuth: []
+    post:
+      tags:
+      - Configuration
+      summary: Set app settings
+      description: Replaces the main application settings with the supplied configuration object.
+      operationId: set_app_settings_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppSettingsRequest'
+  /api/show-website-settings:
+    get:
+      tags:
+      - General
+      summary: Open chromium
+      description: Opens Chromium using the configured kiosk URL.
+      operationId: open_chromium_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: url
+        in: query
+        required: false
+        schema:
+          type: string
+  /api/login:
+    post:
+      tags:
+      - General
+      summary: Login
+      description: Authenticates with the local PIN and returns a short-lived bearer token.
+      operationId: login_post
+      responses:
+        '200':
+          description: Authenticated
+          content:
+            application/json:
+              example:
+                token: 0123456789abcdef0123456789abcdef
+                expires_in: 900
+        '401':
+          description: Invalid PIN.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: unauthorized
+                remaining: 4
+        '423':
+          description: Authentication temporarily locked.
+          content:
+            application/json:
+              example:
+                error: locked
+                retry_in: 600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+  /api/internet:
+    get:
+      tags:
+      - Network
+      summary: Internet
+      description: Returns the current Internet connectivity status.
+      operationId: internet_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/screen-rotate:
+    post:
+      tags:
+      - Display
+      summary: Screen rotate
+      description: Applies the requested screen rotation.
+      operationId: screen_rotate_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/screen-rotate-switch:
+    post:
+      tags:
+      - Display
+      summary: Screen rotate switch
+      description: Switches the screen rotation according to the configured rotation settings.
+      operationId: screen_rotate_switch_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/wifi:
+    get:
+      tags:
+      - Network
+      summary: Wifi
+      description: Lists available Wi-Fi networks.
+      operationId: wifi_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/wifi-status:
+    get:
+      tags:
+      - Network
+      summary: Wifi status
+      description: Returns the currently connected Wi-Fi status.
+      operationId: wifi_status_get
+      responses:
+        '200':
+          description: Wi-Fi status
+          content:
+            application/json:
+              example:
+                connected: true
+                ssid: KioskWiFi
+  /api/connect:
+    post:
+      tags:
+      - Network
+      summary: Connect
+      description: Connects the kiosk to a Wi-Fi network and stores its credentials.
+      operationId: connect_post
+      responses:
+        '200':
+          description: Connection result
+          content:
+            application/json:
+              example:
+                ok: true
+                ssid: KioskWiFi
+                device: wlan0
+                output: successfully activated
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WifiConnectRequest'
+  /api/disconnect:
+    post:
+      tags:
+      - Network
+      summary: Disconnect wifi
+      description: Disconnects the active Wi-Fi device and removes its autoconnect profile.
+      operationId: disconnect_wifi_post
+      responses:
+        '200':
+          description: Disconnect result
+          content:
+            application/json:
+              example:
+                ok: true
+                device: wlan0
+                ssid: KioskWiFi
+                message: WiFi disconnected and autoconnect removed
+  /api/bluetooth/trust:
+    post:
+      tags:
+      - Bluetooth
+      summary: Bt trust
+      description: Adds a Bluetooth device to the trusted-device list.
+      operationId: bt_trust_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BluetoothTrustRequest'
+  /api/bluetooth/untrust:
+    post:
+      tags:
+      - Bluetooth
+      summary: Bt untrust
+      description: Removes a Bluetooth device from the trusted-device list.
+      operationId: bt_untrust_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BluetoothMacRequest'
+  /api/bluetooth/remove:
+    post:
+      tags:
+      - Bluetooth
+      summary: Bt remove
+      description: Disconnects and removes Bluetooth pairing for a device.
+      operationId: bt_remove_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BluetoothMacRequest'
+  /api/bluetooth/status:
+    get:
+      tags:
+      - Bluetooth
+      summary: Bt status
+      description: Returns discovered, paired, connected, trusted and autoconnect Bluetooth device state.
+      operationId: bt_status_get
+      responses:
+        '200':
+          description: Bluetooth state
+          content:
+            application/json:
+              example:
+                connected: []
+                available:
+                - mac: AA:BB:CC:DD:EE:FF
+                  name: Speaker
+                  paired: true
+                  connected: false
+                  rssi: -55
+                  icon: audio-card
+                  trusted: true
+                  autoconnect: false
+  /api/bluetooth/scan:
+    post:
+      tags:
+      - Bluetooth
+      summary: Bt scan
+      description: Performs a Bluetooth scan and returns raw scan output.
+      operationId: bt_scan_post
+      responses:
+        '200':
+          description: Bluetooth scan output
+          content:
+            application/json:
+              example:
+                ok: true
+                raw_output: $ bluetoothctl scan on\nDevice AA:BB:CC:DD:EE:FF Speaker
+  /api/bluetooth/pair:
+    post:
+      tags:
+      - Bluetooth
+      summary: Bt pair
+      description: Pairs with a Bluetooth device and then attempts to connect to it.
+      operationId: bt_pair_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BluetoothPairRequest'
+  /api/bluetooth/disconnect:
+    post:
+      tags:
+      - Bluetooth
+      summary: Bt disconnect
+      description: Disconnects a Bluetooth device.
+      operationId: bt_disconnect_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BluetoothMacRequest'
+  /api/audio/speak:
+    post:
+      tags:
+      - Audio & TTS
+      summary: Audio speak
+      description: Generates or retrieves cached speech audio as WAV.
+      operationId: audio_speak_post
+      responses:
+        '200':
+          description: WAV audio stream
+          content:
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpeakRequest'
+  /api/audio/speak_stream:
+    post:
+      tags:
+      - Audio & TTS
+      summary: Tts stream
+      description: Streams generated speech audio as WAV.
+      operationId: tts_stream_post
+      responses:
+        '200':
+          description: WAV audio stream
+          content:
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpeakRequest'
+  /api/tts_cache_index:
+    get:
+      tags:
+      - Audio & TTS
+      summary: Cache index
+      description: Returns the text-to-speech cache index.
+      operationId: cache_index_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/tts_cache_clear:
+    post:
+      tags:
+      - Audio & TTS
+      summary: Clear cache
+      description: Clears expired/all TTS cache entries according to the backend cache routine.
+      operationId: clear_cache_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+  /api/audio/voices:
+    get:
+      tags:
+      - Audio & TTS
+      summary: List voices
+      description: Lists available Piper voices installed on the kiosk.
+      operationId: list_voices_get
+      responses:
+        '200':
+          description: Installed voices
+          content:
+            application/json:
+              example:
+              - id: piper-pl_PL-mc_speech-medium
+                lang: pl_PL
+                name: mc_speech
+                quality: medium
+                default: true
+  /api/audio/sinks:
+    get:
+      tags:
+      - Audio & TTS
+      summary: Audio sinks
+      description: Lists PulseAudio/PipeWire audio sinks and identifies the default sink.
+      operationId: audio_sinks_get
+      responses:
+        '200':
+          description: Audio sinks
+          content:
+            application/json:
+              example:
+                sinks:
+                - name: alsa_output.example
+                  description: Example sink
+                  default: true
+  /api/audio/set-default:
+    post:
+      tags:
+      - Audio & TTS
+      summary: Audio set default
+      description: Sets the default audio sink.
+      operationId: audio_set_default_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudioSinkRequest'
+  /api/audio/test:
+    post:
+      tags:
+      - Audio & TTS
+      summary: Audio test
+      description: Selects an audio sink and plays the built-in test sound.
+      operationId: audio_test_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudioSinkRequest'
+  /api/audio/volume:
+    get:
+      tags:
+      - Audio & TTS
+      summary: Audio volume get
+      description: Returns the current default audio sink volume.
+      operationId: audio_volume_get_get
+      responses:
+        '200':
+          description: Current volume
+          content:
+            application/json:
+              example:
+                volume: 80
+    post:
+      tags:
+      - Audio & TTS
+      summary: Audio volume set
+      description: Sets and persists the default audio sink volume.
+      operationId: audio_volume_set_post
+      responses:
+        '200':
+          description: Volume changed
+          content:
+            application/json:
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeRequest'
+  /api/bluetooth/test-audio:
+    post:
+      tags:
+      - Bluetooth
+      summary: Bt test audio
+      description: Selects a Bluetooth audio sink and plays the built-in test sound.
+      operationId: bt_test_audio_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+  /api/transaction-place-order:
+    post:
+      tags:
+      - Transactions
+      summary: Transaction place order
+      description: Stores a kiosk order in the daily order database and returns its daily order number.
+      operationId: transaction_place_order_post
+      responses:
+        '200':
+          description: Order stored
+          content:
+            application/json:
+              example:
+                ok: true
+                order_number: 42
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceOrderRequest'
+  /api/transaction-daily-report:
+    post:
+      tags:
+      - Transactions
+      summary: Transaction daily report
+      description: Returns a report for one calendar day.
+      operationId: transaction_daily_report_post
+      responses:
+        '200':
+          description: Daily report
+          content:
+            application/json:
+              example:
+                ok: true
+                date: '2026-09-18'
+                total_orders: 12
+                total_revenue: 345.5
+                average_order_value: 28.79
+                orders:
+                - order_number: 42
+                  timestamp: '2026-09-18T16:00:00+00:00'
+                  order_total: 29.0
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DailyReportRequest'
+  /api/transaction-range-report:
+    post:
+      tags:
+      - Transactions
+      summary: Transaction range report
+      description: Returns aggregated order and revenue statistics for an inclusive date range.
+      operationId: transaction_range_report_post
+      responses:
+        '200':
+          description: Range report
+          content:
+            application/json:
+              example:
+                ok: true
+                date_from: '2026-09-01'
+                date_to: '2026-09-18'
+                total_orders: 120
+                total_revenue: 3456.5
+                average_order_value: 28.8
+                daily:
+                - date: '2026-09-18'
+                  orders: 12
+                  revenue: 345.5
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RangeReportRequest'
+  /api/transaction-search-orders:
+    post:
+      tags:
+      - Transactions
+      summary: Transaction search orders
+      description: Searches stored orders using timestamp, order-number, name, price, quantity, sorting and pagination filters.
+      operationId: transaction_search_orders_post
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              example:
+                ok: true
+                page: 1
+                page_size: 20
+                total: 1
+                total_pages: 1
+                orders:
+                - order_number: 42
+                  timestamp: '2026-09-18T16:00:00+00:00'
+                  order_total: 29.0
+                  cart: []
+                  source_file: orders_2026-09-18.json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchOrdersRequest'
+  /api/transaction-fiscal-orderconfirmation-advanced:
+    post:
+      tags:
+      - Transactions
+      summary: Transaction fiscal orderconfirmation advanced
+      description: Sends an advanced non-fiscal order confirmation to PosnetServer, with optional simulation mode.
+      operationId: transaction_fiscal_orderconfirmation_advanced_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: simulate_success
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: force_simulation_mode
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - disabled
+          - generic_success
+          - generic_error
+          default: disabled
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FiscalRequest'
+  /api/transaction-fiscal-orderconfirmation:
+    post:
+      tags:
+      - Transactions
+      summary: Transaction fiscal orderconfirmation
+      description: Sends a non-fiscal order confirmation to PosnetServer, with optional simulation mode.
+      operationId: transaction_fiscal_orderconfirmation_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: simulate_success
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: force_simulation_mode
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - disabled
+          - generic_success
+          - generic_error
+          default: disabled
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FiscalRequest'
+  /api/transaction-fiscal:
+    post:
+      tags:
+      - Transactions
+      summary: Transaction fiscal
+      description: Fiscalizes an order through PosnetServer, with optional simulation mode.
+      operationId: transaction_fiscal_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: simulate_success
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: force_simulation_mode
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - disabled
+          - generic_success
+          - generic_error
+          default: disabled
+      - name: paymentUUID
+        in: query
+        required: false
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FiscalRequest'
+  /api/transaction-terminal:
+    post:
+      tags:
+      - Transactions
+      summary: Transaction terminal
+      description: Starts a payment-terminal transaction using the configured provider.
+      operationId: transaction_terminal_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: simulate_success
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: force_simulation_mode
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - disabled
+          - generic_success
+          - generic_error
+          default: disabled
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminalTransactionRequest'
+  /api/reverse-proxy/open:
+    post:
+      tags:
+      - Reverse proxy & support
+      summary: Open reverse proxy
+      description: Opens a reverse SSH support tunnel.
+      operationId: open_reverse_proxy_post
+      responses:
+        '200':
+          description: Reverse proxy result
+          content:
+            application/json:
+              example:
+                status: ok
+                error: null
+                port: 2345
+                pid: 1234
+  /api/reverse-proxy/list:
+    get:
+      tags:
+      - Reverse proxy & support
+      summary: List reverse proxies
+      description: Lists currently active reverse SSH support tunnels.
+      operationId: list_reverse_proxies_get
+      responses:
+        '200':
+          description: Reverse proxy list/history
+          content:
+            application/json:
+              example:
+                ok: true
+                list: []
+  /api/reverse-proxy/history:
+    get:
+      tags:
+      - Reverse proxy & support
+      summary: History reverse proxies
+      description: Returns the reverse proxy/support request history.
+      operationId: history_reverse_proxies_get
+      responses:
+        '200':
+          description: Reverse proxy list/history
+          content:
+            application/json:
+              example:
+                ok: true
+                list: []
+  /api/reverse-proxy/close-all:
+    post:
+      tags:
+      - Reverse proxy & support
+      summary: Close all reverse proxies
+      description: Closes all active reverse SSH support tunnels.
+      operationId: close_all_reverse_proxies_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+  /api/androidtv/volume:
+    get:
+      tags:
+      - Android TV
+      summary: Api get volume
+      description: Returns the Android TV audio volume for the requested stream.
+      operationId: api_get_volume_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: stream
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 3
+    post:
+      tags:
+      - Android TV
+      summary: Api set volume
+      description: Sets Android TV audio volume for the requested stream.
+      operationId: api_set_volume_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AndroidTvVolumeRequest'
+  /api/androidtv/status:
+    get:
+      tags:
+      - Android TV
+      summary: Androidtv status
+      description: Returns the current ADB/Android TV device state.
+      operationId: androidtv_status_get
+      responses:
+        '200':
+          description: ADB state
+          content:
+            application/json:
+              example:
+                state: device
+  /api/androidtv/time_status:
+    get:
+      tags:
+      - Android TV
+      summary: Time status
+      description: Returns Android TV current time and automatic/manual time synchronization status.
+      operationId: time_status_get
+      responses:
+        '200':
+          description: Android TV time state
+          content:
+            application/json:
+              example:
+                success: true
+                current_time: Fri Sep 18 16:00:00 CEST 2026
+                auto_time: '1'
+                mode: automatic
+                description: czas będzie synchronizowany automatycznie (NTP/operator)
+                time_source: network
+  /api/androidtv/kiosklauncher/status:
+    get:
+      tags:
+      - Android TV
+      summary: Androidtv kiosklauncher status
+      description: Checks whether KioskLauncher is installed on the Android TV device.
+      operationId: androidtv_kiosklauncher_status_get
+      responses:
+        '200':
+          description: Installation state
+          content:
+            application/json:
+              example:
+                installed: true
+  /api/androidtv/kiosklauncher/broadcast:
+    post:
+      tags:
+      - Android TV
+      summary: Androidtv kiosklauncher broadcast
+      description: Sends the kiosk configuration to KioskLauncher using an Android broadcast.
+      operationId: androidtv_kiosklauncher_broadcast_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: host
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: protocol
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: path
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: mode_url_user
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: mode_url_pass
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: gnirehtet
+        in: query
+        required: false
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KioskLauncherBroadcastRequest'
+
+  /api/androidtv/wallpaper/upload:
+    post:
+      tags:
+      - Android TV
+      summary: Upload wallpaper
+      description: Uploads a wallpaper and applies it to the Android TV device.
+      operationId: upload_wallpaper_post
+      responses:
+        '200':
+          description: Wallpaper operation result
+          content:
+            application/json:
+              example:
+                status: success
+                uploaded_file: /tmp/android_wallpapers/wallpaper.png
+                results: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              additionalProperties: true
+
+  /api/androidtv/connection:
+    post:
+      tags:
+      - Android TV
+      summary: Androidtv connection
+      description: Changes the Android TV connection mode between USB, HDMI and network.
+      operationId: androidtv_connection_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AndroidConnectionRequest'
+  /api/androidtv/tap:
+    post:
+      tags:
+      - Android TV
+      summary: Androidtv tap
+      description: Sends an Android TV touch/tap command at the supplied coordinates.
+      operationId: androidtv_tap_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      parameters:
+      - name: x
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: y
+        in: query
+        required: false
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AndroidTapRequest'
+  /api/androidtv/grid:
+    post:
+      tags:
+      - Android TV
+      summary: Androidtv pointer
+      description: Enables or disables Android pointer-location debugging.
+      operationId: androidtv_pointer_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      parameters:
+      - name: value
+        in: query
+        required: false
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AndroidPointerRequest'
+  /api/androidtv/reboot:
+    post:
+      tags:
+      - Android TV
+      summary: Reboot
+      description: Reboots the Android TV device.
+      operationId: reboot_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+  /api/androidtv/poweroff:
+    post:
+      tags:
+      - Android TV
+      summary: Poweroff
+      description: Powers off the Android TV device.
+      operationId: poweroff_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+  /api/androidtv/recovery:
+    post:
+      tags:
+      - Android TV
+      summary: Recovery
+      description: Reboots the Android TV device into recovery.
+      operationId: recovery_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+  /api/androidtv/reset-ui:
+    post:
+      tags:
+      - Android TV
+      summary: Reset ui
+      description: Resets the Android TV UI.
+      operationId: reset_ui_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+  /api/reverse-proxy/sendlogs:
+    post:
+      tags:
+      - Reverse proxy & support
+      summary: Send chromium log
+      description: Starts asynchronous collection/sending of Chromium and related logs.
+      operationId: send_chromium_log_post
+      responses:
+        '200':
+          description: Log transfer job
+          content:
+            application/json:
+              example:
+                ok: true
+                request_id: 550e8400-e29b-41d4-a716-446655440000
+                has_errors: false
+                has_finished: false
+                files: []
+  /api/reverse-proxy/sendlogs-status/{request_id}:
+    get:
+      tags:
+      - Reverse proxy & support
+      summary: Send chromium log status
+      description: Returns the current status of an asynchronous log-sending request.
+      operationId: send_chromium_log_status_get
+      responses:
+        '200':
+          description: Log transfer status
+          content:
+            application/json:
+              example:
+                ok: true
+                request_id: 550e8400-e29b-41d4-a716-446655440000
+                has_errors: false
+                has_finished: true
+                files: []
+      parameters:
+      - name: request_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /api/files/list:
+    get:
+      tags:
+      - Files & resources
+      summary: List files
+      description: Lists files and directories below the kiosk file-management root with pagination and sorting.
+      operationId: list_files_get
+      responses:
+        '200':
+          description: File listing
+          content:
+            application/json:
+              example:
+                page: 1
+                per_page: 20
+                total: 1
+                items:
+                - name: example.png
+                  path: assets/example.png
+                  type: file
+                  size: 12345
+      parameters:
+      - name: path
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+          default: name
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: asc
+  /api/files/rename:
+    post:
+      tags:
+      - Files & resources
+      summary: Rename
+      description: Renames a file or directory.
+      operationId: rename_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                status: renamed
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovePathRequest'
+  /api/files/move:
+    post:
+      tags:
+      - Files & resources
+      summary: Move
+      description: Moves a file or directory.
+      operationId: move_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                status: renamed
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovePathRequest'
+  /api/files/download/{filepath}:
+    get:
+      tags:
+      - Files & resources
+      summary: Download
+      description: Downloads a file from the kiosk file-management root.
+      operationId: download_get
+      responses:
+        '200':
+          description: Requested file
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Path does not resolve to a file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      parameters:
+      - name: filepath
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example
+    parameters:
+    - name: filepath
+      in: path
+      required: true
+      schema:
+        type: string
+      example: assets/menu.png
+  /api/files/upload:
+    post:
+      tags:
+      - Files & resources
+      summary: Upload file
+      description: Uploads a complete file to the kiosk file-management root.
+      operationId: upload_file_post
+      responses:
+        '200':
+          description: Upload completed
+          content:
+            application/json:
+              example:
+                status: uploaded
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - file
+              - filename
+              properties:
+                file:
+                  type: string
+                  format: binary
+                filename:
+                  type: string
+                  example: menu.png
+                path:
+                  type: string
+                  example: assets/kiosk
+
+  /api/files/upload/chunk:
+    post:
+      tags:
+      - Files & resources
+      summary: Upload chunk
+      description: Uploads one chunk of a file; once all chunks are present the backend merges them.
+      operationId: upload_chunk_post
+      responses:
+        '200':
+          description: Chunk accepted or upload completed
+          content:
+            application/json:
+              examples:
+                chunk:
+                  value:
+                    status: chunk_uploaded
+                complete:
+                  value:
+                    status: uploaded_complete
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - chunk
+              - filename
+              - chunk_index
+              - total_chunks
+              properties:
+                file:
+                  type: string
+                  format: binary
+                chunk:
+                  type: string
+                  format: binary
+                filename:
+                  type: string
+                  example: large-video.mp4
+                chunk_index:
+                  type: integer
+                  minimum: 0
+                  example: 0
+                total_chunks:
+                  type: integer
+                  minimum: 1
+                  example: 10
+                path:
+                  type: string
+                  example: videos
+  /api/files/dir:
+    post:
+      tags:
+      - Files & resources
+      summary: Create directory
+      description: Creates a directory in the kiosk file-management root.
+      operationId: create_directory_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                status: renamed
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PathRequest'
+    delete:
+      tags:
+      - Files & resources
+      summary: Delete directory
+      description: Deletes a directory recursively.
+      operationId: delete_directory_delete
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                status: renamed
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PathRequest'
+  /api/qr-scanner/devices:
+    get:
+      tags:
+      - QR scanner
+      summary: Qr scanner devices
+      description: Lists input devices and returns the currently selected QR/barcode scanner.
+      operationId: qr_scanner_devices_get
+      responses:
+        '200':
+          description: Input devices
+          content:
+            application/json:
+              example:
+                devices:
+                - path: /dev/input/event5
+                  name: USB Barcode Scanner
+                  vendor: 8752
+                  product: 1
+                  phys: usb-1/input0
+                  uniq: '123'
+                  is_keyboard: true
+                selected: /dev/input/event5
+  /api/qr-scanner/device:
+    post:
+      tags:
+      - QR scanner
+      summary: Qr scanner set device
+      description: Selects an input device as the QR/barcode scanner.
+      operationId: qr_scanner_set_device_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QrScannerDeviceRequest'
+  /api/qr-scanner/events:
+    get:
+      tags:
+      - QR scanner
+      summary: Qr scanner events
+      description: Opens a Server-Sent Events stream that emits scanned QR/barcode values.
+      operationId: qr_scanner_events_get
+      responses:
+        '200':
+          description: Server-Sent Events stream. `connected` is emitted initially and `qr-scanned` events contain `{code}`.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                example: 'event: connected\ndata: {"success": true}\n\nevent: qr-scanned\ndata: {"code": "123456789"}\n\n'
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/license/info:
+    get:
+      tags:
+      - License
+      summary: License info
+      description: Returns the configured PosnetServer and IngenicoServer license identifiers.
+      operationId: license_info_get
+      responses:
+        '200':
+          description: License identifiers
+          content:
+            application/json:
+              example:
+                posnetserver: uuid-posnet
+                ingenicoserver: uuid-ingenico
+  /api/license/use:
+    post:
+      tags:
+      - License
+      summary: License use new
+      description: Downloads and activates one or both supplied PosnetServer/IngenicoServer licenses.
+      operationId: license_use_new_post
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                ok: true
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseUseRequest'
+  /api/files/info:
+    get:
+      tags:
+      - Files & resources
+      summary: File info
+      description: Returns metadata for a file or directory.
+      operationId: file_info_get
+      responses:
+        '200':
+          description: File metadata
+          content:
+            application/json:
+              example:
+                name: example.png
+                path: assets/example.png
+                type: file
+                size: 12345
+                created: '2026-09-18T16:00:00'
+                modified: '2026-09-18T16:00:00'
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: File or directory not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      parameters:
+      - name: path
+        in: query
+        required: false
+        schema:
+          type: string
+  /api/files/file:
+    delete:
+      tags:
+      - Files & resources
+      summary: Delete file
+      description: Deletes a file from the kiosk file-management root.
+      operationId: delete_file_delete
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              example:
+                status: renamed
+        '400':
+          description: Invalid request or missing required input.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PathRequest'
+  /api/eth:
+    get:
+      tags:
+      - Network
+      summary: Eth
+      description: Returns Ethernet interface, connection and MAC information.
+      operationId: eth_get
+      responses:
+        '200':
+          description: Ethernet status
+          content:
+            application/json:
+              example:
+                interface: eth0
+                connected: true
+                mac: AA:BB:CC:DD:EE:FF
+  /api/posnetserver/:
+    get:
+      tags:
+      - PosnetServer proxy
+      summary: Proxy request to PosnetServer
+      description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
+      operationId: posnetserver_proxy_base_get
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - PosnetServer proxy
+      summary: Proxy request to PosnetServer
+      description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
+      operationId: posnetserver_proxy_base_post
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+      - PosnetServer proxy
+      summary: Proxy request to PosnetServer
+      description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
+      operationId: posnetserver_proxy_base_put
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - PosnetServer proxy
+      summary: Proxy request to PosnetServer
+      description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
+      operationId: posnetserver_proxy_base_delete
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      tags:
+      - PosnetServer proxy
+      summary: Proxy request to PosnetServer
+      description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
+      operationId: posnetserver_proxy_base_patch
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    options:
+      tags:
+      - PosnetServer proxy
+      summary: Proxy request to PosnetServer
+      description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
+      operationId: posnetserver_proxy_base_options
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/ingenicoserver/:
+    get:
+      tags:
+      - IngenicoServer proxy
+      summary: Proxy request to IngenicoServer
+      description: Transparent proxy for the local IngenicoServer service. This base route forwards the request to the service root.
+      operationId: ingenicoserver_proxy_base_get
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - IngenicoServer proxy
+      summary: Proxy request to IngenicoServer
+      description: Transparent proxy for the local IngenicoServer service. This base route forwards the request to the service root.
+      operationId: ingenicoserver_proxy_base_post
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+      - IngenicoServer proxy
+      summary: Proxy request to IngenicoServer
+      description: Transparent proxy for the local IngenicoServer service. This base route forwards the request to the service root.
+      operationId: ingenicoserver_proxy_base_put
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - IngenicoServer proxy
+      summary: Proxy request to IngenicoServer
+      description: Transparent proxy for the local IngenicoServer service. This base route forwards the request to the service root.
+      operationId: ingenicoserver_proxy_base_delete
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      tags:
+      - IngenicoServer proxy
+      summary: Proxy request to IngenicoServer
+      description: Transparent proxy for the local IngenicoServer service. This base route forwards the request to the service root.
+      operationId: ingenicoserver_proxy_base_patch
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    options:
+      tags:
+      - IngenicoServer proxy
+      summary: Proxy request to IngenicoServer
+      description: Transparent proxy for the local IngenicoServer service. This base route forwards the request to the service root.
+      operationId: ingenicoserver_proxy_base_options
+      responses:
+        '200':
+          description: Downstream service response; status and body are passed through.
+        '502':
+          description: Downstream service connection error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '504':
+          description: Downstream service timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+      description: Bearer token returned by `/api/login`. The token is stored server-side and expires after 900 seconds.
+  schemas:
+    OkResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: true
+      additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        error:
+          type: string
+        details:
+          type: string
+      additionalProperties: true
+    CreateOrderRequest:
+      type: object
+      required:
+      - cart
+      properties:
+        cart:
+          type: array
+          items:
+            type: object
+        totalPrice:
+          type: number
+          example: 29.0
+        description:
+          type: string
+          example: Kiosk order
+        name:
+          type: string
+          example: Kiosk
+        domain:
+          type: string
+          example: example.com
+        protocol:
+          type: string
+          example: https
+    ChangePinRequest:
+      type: object
+      required:
+      - old_pin
+      - new_pin
+      properties:
+        old_pin:
+          type: string
+          example: '1234'
+        new_pin:
+          type: string
+          example: '5678'
+    RestartUiRequest:
+      type: object
+      required:
+      - seconds
+      properties:
+        seconds:
+          type: integer
+          minimum: 1
+          maximum: 3600
+          example: 30
+    SettingsUpdateKeyRequest:
+      type: object
+      required:
+      - path
+      - value
+      properties:
+        path:
+          type: string
+          example: terminal.enabled
+        value:
+          description: Value assigned to the dotted configuration path.
+    SecurityKeyRequest:
+      type: object
+      required:
+      - security_key
+      properties:
+        security_key:
+          type: string
+          minLength: 16
+          maxLength: 16
+          example: 1234567890ABCDEF
+    MouseCursorRequest:
+      type: object
+      required:
+      - show
+      properties:
+        show:
+          description: Boolean-like value; handler accepts boolean, 0/1 or "true"/"1".
+          example: true
+    SupportHostRequest:
+      type: object
+      required:
+      - host
+      properties:
+        host:
+          type: string
+          example: support.example.com
+    TextConfigRequest:
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          type: string
+          example: 'default:\n  license:\n    file: /path/license.lic\n'
+    CommandRequest:
+      type: object
+      required:
+      - cmd
+      properties:
+        cmd:
+          type: string
+          example: uptime
+    TestUrlRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          example: https://example.com/settings.html
+        url_user:
+          type: string
+          example: admin
+        url_pass:
+          type: string
+          format: password
+          example: secret
+    AppSettingsRequest:
+      type: object
+      properties:
+        settings_visible:
+          type: boolean
+          example: true
+        settings_rotate_visible:
+          type: boolean
+          example: true
+        settings_rotate_angle:
+          type: integer
+          example: 180
+        settings_rotate_angle_default:
+          type: integer
+          example: 0
+        show_mouse_cursor:
+          type: boolean
+          example: false
+        print_additional_cashier_ticket:
+          type: boolean
+          example: false
+        screensaver_reset_cart:
+          type: boolean
+          example: false
+        send_sales_data_to_b2b:
+          type: boolean
+          example: false
+        mode:
+          type: string
+          example: kiosk-demo-kawiarnia
+        localfs_selected_files:
+          type: array
+          items:
+            type: string
+        mode_url:
+          type: string
+          example: ''
+        mode_url_user:
+          type: string
+          example: ''
+        mode_url_pass:
+          type: string
+          format: password
+          example: ''
+        mode_url_auth_type:
+          type: string
+          example: front
+        idle_time:
+          type: integer
+          example: 60
+        support_alt_host:
+          type: string
+          example: ''
+        support_keep_connection_live:
+          type: boolean
+          example: false
+        android:
+          type: object
+          additionalProperties: true
+        terminal:
+          type: object
+          additionalProperties: true
+        fiscal:
+          type: object
+          additionalProperties: true
+        barcodereader:
+          type: object
+          additionalProperties: true
+        accessibility:
+          type: object
+          additionalProperties: true
+        security_key:
+          type: string
+          example: ''
+        blik:
+          type: object
+          additionalProperties: true
+      additionalProperties: true
+    LoginRequest:
+      type: object
+      required:
+      - pin
+      properties:
+        pin:
+          type: string
+          example: '1234'
+    WifiConnectRequest:
+      type: object
+      required:
+      - ssid
+      properties:
+        ssid:
+          type: string
+          example: KioskWiFi
+        password:
+          type: string
+          format: password
+          example: wifi-password
+    BluetoothTrustRequest:
+      type: object
+      required:
+      - mac
+      properties:
+        mac:
+          type: string
+          example: AA:BB:CC:DD:EE:FF
+        name:
+          type: string
+          example: Bluetooth Speaker
+        icon:
+          type: string
+          example: audio-card
+    BluetoothMacRequest:
+      type: object
+      required:
+      - mac
+      properties:
+        mac:
+          type: string
+          example: AA:BB:CC:DD:EE:FF
+    BluetoothPairRequest:
+      type: object
+      required:
+      - mac
+      properties:
+        mac:
+          type: string
+          example: AA:BB:CC:DD:EE:FF
+        pin:
+          type: string
+          nullable: true
+          example: '1234'
+    SpeakRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          example: Witamy w naszej restauracji.
+        id:
+          type: string
+          example: piper-pl_PL-mc_speech-medium
+    AudioSinkRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: alsa_output.platform-soc_sound.stereo-fallback
+    VolumeRequest:
+      type: object
+      required:
+      - volume
+      properties:
+        volume:
+          type: integer
+          minimum: 0
+          maximum: 150
+          example: 80
+    PlaceOrderRequest:
+      type: object
+      required:
+      - cart
+      - total
+      properties:
+        cart:
+          type: array
+          minItems: 1
+          items:
+            type: object
+        total:
+          type: number
+          example: 29.0
+        payment:
+          type: object
+          nullable: true
+          additionalProperties: true
+    DailyReportRequest:
+      type: object
+      required:
+      - date
+      properties:
+        date:
+          type: string
+          format: date
+          example: '2026-09-18'
+    RangeReportRequest:
+      type: object
+      required:
+      - date_from
+      - date_to
+      properties:
+        date_from:
+          type: string
+          format: date
+          example: '2026-09-01'
+        date_to:
+          type: string
+          format: date
+          example: '2026-09-18'
+    SearchOrdersRequest:
+      type: object
+      properties:
+        timestamp_from:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-09-01T00:00:00+00:00'
+        timestamp_to:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-09-18T23:59:59+00:00'
+        order_number_from:
+          type: integer
+          nullable: true
+          example: 1
+        order_number_to:
+          type: integer
+          nullable: true
+          example: 1000
+        name_contains:
+          type: string
+          example: burger
+        price_from:
+          type: number
+          nullable: true
+          example: 10
+        price_to:
+          type: number
+          nullable: true
+          example: 50
+        qty_from:
+          type: integer
+          default: 0
+          example: 1
+        qty_to:
+          type: integer
+          default: 0
+          example: 10
+        sort_by:
+          type: string
+          enum:
+          - timestamp
+          - order_number
+          - order_total
+          default: timestamp
+        sort_dir:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        page:
+          type: integer
+          default: 1
+          example: 1
+        page_size:
+          type: integer
+          default: 20
+          example: 20
+    FiscalRequest:
+      type: object
+      description: Raw JSON payload forwarded to the corresponding PosnetServer endpoint. The exact fields depend on the fiscal/order-confirmation
+        operation.
+      additionalProperties: true
+      example:
+        items:
+        - name: Big Classic Burger
+          price: 18
+          qty: 1
+          vat: A
+        total: 18.0
+    TerminalTransactionRequest:
+      type: object
+      required:
+      - amount
+      properties:
+        amount:
+          type: integer
+          description: Transaction amount passed to the configured terminal provider.
+          example: 2900
+    AndroidTvVolumeRequest:
+      type: object
+      properties:
+        level:
+          type: integer
+          example: 50
+        stream:
+          type: integer
+          default: 3
+          example: 3
+    KioskLauncherBroadcastRequest:
+      type: object
+      properties:
+        host:
+          type: string
+          example: 192.168.1.10
+        protocol:
+          type: string
+          example: https
+        path:
+          type: string
+          default: /kiosk/
+          example: /kiosk/
+        mode_url_user:
+          type: string
+          example: user
+        mode_url_pass:
+          type: string
+          format: password
+          example: secret
+        gnirehtet:
+          type: string
+          example: 'on'
+    AndroidConnectionRequest:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          enum:
+          - usb
+          - hdmi
+          - network
+          example: usb
+    AndroidTapRequest:
+      type: object
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: integer
+          example: 500
+        y:
+          type: integer
+          example: 300
+    AndroidPointerRequest:
+      type: object
+      required:
+      - value
+      properties:
+        value:
+          type: integer
+          enum:
+          - 0
+          - 1
+          example: 1
+    MovePathRequest:
+      type: object
+      required:
+      - src
+      - dst
+      properties:
+        src:
+          type: string
+          example: assets/old.png
+        dst:
+          type: string
+          example: assets/new.png
+    PathRequest:
+      type: object
+      required:
+      - path
+      properties:
+        path:
+          type: string
+          example: assets/new-folder
+    QrScannerDeviceRequest:
+      type: object
+      required:
+      - device
+      properties:
+        device:
+          type: string
+          example: /dev/input/event5
+    LicenseUseRequest:
+      type: object
+      properties:
+        posnetserver:
+          type: string
+          nullable: true
+          example: POSNET-LICENSE-UUID
+        ingenicoserver:
+          type: string
+          nullable: true
+          example: INGENICO-LICENSE-UUID
+    GenericResponse:
+      type: object
+      additionalProperties: true
