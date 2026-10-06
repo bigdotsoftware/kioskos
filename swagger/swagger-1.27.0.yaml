@@ -21,7 +21,7 @@ tags:
 - name: Audio & TTS
 - name: Transactions
 - name: PayNow
-- name: POSNETServer proxy
+- name: PosnetServer proxy
 - name: IngenicoServer proxy
 - name: Reverse proxy & support
 - name: Android TV
@@ -32,7 +32,7 @@ paths:
   /api/posnetserver/{path}:
     get:
       tags:
-      - POSNETServer proxy
+      - PosnetServer proxy
       summary: Posnet proxy
       description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
       operationId: posnet_proxy_get
@@ -52,20 +52,20 @@ paths:
         schema:
           type: string
         example: status
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              type: object
-              additionalProperties: true
-          application/octet-stream:
-            schema:
-              type: string
-              format: binary
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
     post:
       tags:
-      - POSNETServer proxy
+      - PosnetServer proxy
       summary: Posnet proxy
       description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
       operationId: posnet_proxy_post
@@ -85,6 +85,17 @@ paths:
         schema:
           type: string
         example: status
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
       requestBody:
         required: false
         content:
@@ -98,7 +109,7 @@ paths:
               format: binary
     put:
       tags:
-      - POSNETServer proxy
+      - PosnetServer proxy
       summary: Posnet proxy
       description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
       operationId: posnet_proxy_put
@@ -118,6 +129,17 @@ paths:
         schema:
           type: string
         example: status
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
       requestBody:
         required: false
         content:
@@ -131,7 +153,7 @@ paths:
               format: binary
     delete:
       tags:
-      - POSNETServer proxy
+      - PosnetServer proxy
       summary: Posnet proxy
       description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
       operationId: posnet_proxy_delete
@@ -151,9 +173,20 @@ paths:
         schema:
           type: string
         example: status
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
     patch:
       tags:
-      - POSNETServer proxy
+      - PosnetServer proxy
       summary: Posnet proxy
       description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
       operationId: posnet_proxy_patch
@@ -173,6 +206,17 @@ paths:
         schema:
           type: string
         example: status
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
       requestBody:
         required: false
         content:
@@ -186,7 +230,7 @@ paths:
               format: binary
     options:
       tags:
-      - POSNETServer proxy
+      - PosnetServer proxy
       summary: Posnet proxy
       description: Transparent proxy for the local PosnetServer service. The path after `/api/posnetserver/` is forwarded to PosnetServer.
       operationId: posnet_proxy_options
@@ -206,6 +250,17 @@ paths:
         schema:
           type: string
         example: status
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
 
   /api/ingenicoserver/{path}:
     get:
@@ -2899,6 +2954,18 @@ paths:
       summary: Proxy request to PosnetServer
       description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
       operationId: posnetserver_proxy_base_get
+      parameters:
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
       responses:
         '200':
           description: Downstream service response; status and body are passed through.
@@ -2920,6 +2987,18 @@ paths:
       summary: Proxy request to PosnetServer
       description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
       operationId: posnetserver_proxy_base_post
+      parameters:
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
       requestBody:
         required: false
         content:
@@ -2952,6 +3031,18 @@ paths:
       summary: Proxy request to PosnetServer
       description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
       operationId: posnetserver_proxy_base_put
+      parameters:
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
       requestBody:
         required: false
         content:
@@ -2984,6 +3075,18 @@ paths:
       summary: Proxy request to PosnetServer
       description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
       operationId: posnetserver_proxy_base_delete
+      parameters:
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
       responses:
         '200':
           description: Downstream service response; status and body are passed through.
@@ -3005,6 +3108,18 @@ paths:
       summary: Proxy request to PosnetServer
       description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
       operationId: posnetserver_proxy_base_patch
+      parameters:
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
       requestBody:
         required: false
         content:
@@ -3037,6 +3152,18 @@ paths:
       summary: Proxy request to PosnetServer
       description: Transparent proxy for the local PosnetServer service. This base route forwards the request to the service root.
       operationId: posnetserver_proxy_base_options
+      parameters:
+      - name: fulldebug
+        in: query
+        schema:
+          type: boolean
+        example: false
+      - name: instance
+        in: query
+        schema:
+          type: integer
+        example: 0
+        description: Use when Kiosk manages more than one printer. Instance of default, main printer is 0.
       responses:
         '200':
           description: Downstream service response; status and body are passed through.
@@ -3384,6 +3511,12 @@ components:
         print_additional_cashier_ticket:
           type: boolean
           example: false
+        print_additional_cashier_ticket_type:
+          type: string
+          example: "order_number"
+        print_additional_cashier_ticket_custom_text:
+          type: string
+          example: ""
         screensaver_reset_cart:
           type: boolean
           example: false
@@ -3440,6 +3573,17 @@ components:
         blik:
           type: object
           additionalProperties: true
+        cash:
+          type: object
+          additionalProperties: true
+        additional_fiscals:
+          type: array
+          items:
+            type: object
+        additional_terminals:
+          type: array
+          items:
+            type: object
       additionalProperties: true
     LoginRequest:
       type: object
