@@ -8,7 +8,7 @@ info:
     transparent downstream proxies because their detailed schemas are implemented by the downstream services.
 servers:
 - url: http://localhost:8080
-  description: Local kiosk backend (default port from server.py)
+  description: Kiosk backend API
 tags:
 - name: General
 - name: Configuration
