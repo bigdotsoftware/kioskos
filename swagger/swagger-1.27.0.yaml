@@ -3779,6 +3779,9 @@ components:
         accessibility:
           type: object
           additionalProperties: true
+        mysql:
+          type: object
+          additionalProperties: true
         security_key:
           type: string
           example: ''
