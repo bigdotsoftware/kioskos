@@ -18,6 +18,7 @@ tags:
 - name: Display
 - name: Network
 - name: Bluetooth
+- name: MySQL
 - name: Audio & TTS
 - name: Transactions
 - name: PayNow
@@ -29,6 +30,217 @@ tags:
 - name: QR scanner
 - name: License
 paths:
+  /api/mysql/status:
+    get:
+      tags:
+        - MySQL
+      summary: Sprawdź status MySQL
+      description: Zwraca aktualny status usługi MariaDB/MySQL.
+      operationId: mysqlStatus
+      responses:
+        '200':
+          description: Status usługi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  status:
+                    type: string
+                    enum:
+                      - running
+                      - stopped
+                      - failed
+                      - unknown
+                    example: running
+                  command:
+                    type: string
+                    example: mysql-status
+                  returncode:
+                    type: integer
+                    example: 0
+                  output:
+                    type: string
+                    example: "active"
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+                required:
+                  - ok
+                  - status
+
+
+  /api/mysql/start:
+    post:
+      tags:
+        - MySQL
+      summary: Uruchom MySQL
+      description: Uruchamia usługę MariaDB/MySQL przy użyciu polecenia mysql-start.
+      operationId: mysqlStart
+      responses:
+        '200':
+          description: Wynik uruchomienia usługi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  command:
+                    type: string
+                    example: mysql-start
+                  returncode:
+                    type: integer
+                    example: 0
+                  output:
+                    type: string
+                    example: "Starting MariaDB..."
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+                required:
+                  - ok
+                  - command
+        '500':
+          description: Nie udało się uruchomić usługi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: false
+                  command:
+                    type: string
+                    example: mysql-start
+                  returncode:
+                    type: integer
+                    example: 1
+                  output:
+                    type: string
+                  error:
+                    type: string
+
+
+  /api/mysql/stop:
+    post:
+      tags:
+        - MySQL
+      summary: Zatrzymaj MySQL
+      description: Zatrzymuje usługę MariaDB/MySQL przy użyciu polecenia mysql-stop.
+      operationId: mysqlStop
+      responses:
+        '200':
+          description: Wynik zatrzymania usługi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  command:
+                    type: string
+                    example: mysql-stop
+                  returncode:
+                    type: integer
+                    example: 0
+                  output:
+                    type: string
+                    example: "Stopping MariaDB..."
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+                required:
+                  - ok
+                  - command
+        '500':
+          description: Nie udało się zatrzymać usługi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: false
+                  command:
+                    type: string
+                    example: mysql-stop
+                  returncode:
+                    type: integer
+                    example: 1
+                  output:
+                    type: string
+                  error:
+                    type: string
+
+
+  /api/mysql/restart:
+    post:
+      tags:
+        - MySQL
+      summary: Zrestartuj MySQL
+      description: Restartuje usługę MariaDB/MySQL przy użyciu polecenia mysql-restart.
+      operationId: mysqlRestart
+      responses:
+        '200':
+          description: Wynik restartu usługi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  command:
+                    type: string
+                    example: mysql-restart
+                  returncode:
+                    type: integer
+                    example: 0
+                  output:
+                    type: string
+                    example: "Restarting MariaDB..."
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+                required:
+                  - ok
+                  - command
+        '500':
+          description: Nie udało się zrestartować usługi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: false
+                  command:
+                    type: string
+                    example: mysql-restart
+                  returncode:
+                    type: integer
+                    example: 1
+                  output:
+                    type: string
+                  error:
+                    type: string
+
   /api/posnetserver/{path}:
     get:
       tags:
