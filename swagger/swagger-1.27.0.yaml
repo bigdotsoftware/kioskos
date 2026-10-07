@@ -30,16 +30,29 @@ tags:
 - name: QR scanner
 - name: License
 paths:
+
   /api/mysql/status:
     get:
-      tags:
-        - MySQL
-      summary: Sprawdź status MySQL
-      description: Zwraca aktualny status usługi MariaDB/MySQL.
+      tags: [MySQL]
+      summary: Get MySQL status
       operationId: mysqlStatus
       responses:
         '200':
-          description: Status usługi
+          description: MySQL status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MySQLStatus'
+
+
+  /api/mysql/databases:
+    get:
+      tags: [MySQL]
+      summary: List databases
+      operationId: mysqlListDatabases
+      responses:
+        '200':
+          description: Database list
           content:
             application/json:
               schema:
@@ -47,31 +60,300 @@ paths:
                 properties:
                   ok:
                     type: boolean
-                    example: true
-                  status:
-                    type: string
-                    enum:
-                      - running
-                      - stopped
-                      - failed
-                      - unknown
-                    example: running
-                  command:
-                    type: string
-                    example: mysql-status
-                  returncode:
-                    type: integer
-                    example: 0
-                  output:
-                    type: string
-                    example: "active"
-                  error:
-                    type: string
-                    nullable: true
-                    example: null
-                required:
-                  - ok
-                  - status
+                  databases:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        database:
+                          type: string
+
+
+  /api/mysql/database:
+    post:
+      tags: [MySQL]
+      summary: Create database
+      operationId: mysqlCreateDatabase
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MySQLDatabaseRequest'
+      responses:
+        '200':
+          description: Database created
+
+
+  /api/mysql/database/{database}:
+    delete:
+      tags: [MySQL]
+      summary: Delete database
+      operationId: mysqlDeleteDatabase
+      parameters:
+        - name: database
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - confirm
+              properties:
+                confirm:
+                  type: string
+      responses:
+        '200':
+          description: Database deleted
+
+
+  /api/mysql/tables:
+    get:
+      tags: [MySQL]
+      summary: List tables
+      operationId: mysqlListTables
+      parameters:
+        - name: database
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Table list
+
+
+  /api/mysql/table/structure:
+    get:
+      tags: [MySQL]
+      summary: Get table structure
+      operationId: mysqlTableStructure
+      parameters:
+        - name: database
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: table
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Table structure
+
+
+  /api/mysql/table:
+    post:
+      tags: [MySQL]
+      summary: Create table
+      operationId: mysqlCreateTable
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MySQLCreateTableRequest'
+      responses:
+        '200':
+          description: Table created
+
+    delete:
+      tags: [MySQL]
+      summary: Delete table
+      operationId: mysqlDeleteTable
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MySQLDeleteTableRequest'
+      responses:
+        '200':
+          description: Table deleted
+
+
+  /api/mysql/users:
+    get:
+      tags: [MySQL]
+      summary: List users
+      operationId: mysqlListUsers
+      responses:
+        '200':
+          description: User list
+
+
+  /api/mysql/user:
+    post:
+      tags: [MySQL]
+      summary: Create user
+      operationId: mysqlCreateUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MySQLCreateUserRequest'
+      responses:
+        '200':
+          description: User created
+
+    delete:
+      tags: [MySQL]
+      summary: Delete user
+      operationId: mysqlDeleteUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MySQLDeleteUserRequest'
+      responses:
+        '200':
+          description: User deleted
+
+
+  /api/mysql/user/grants:
+    get:
+      tags: [MySQL]
+      summary: Get user grants
+      operationId: mysqlGetGrants
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: host
+          in: query
+          schema:
+            type: string
+            default: localhost
+      responses:
+        '200':
+          description: User grants
+
+    post:
+      tags: [MySQL]
+      summary: Grant privileges
+      operationId: mysqlGrantUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MySQLGrantRequest'
+      responses:
+        '200':
+          description: Privileges granted
+
+
+  /api/mysql/user/revoke:
+    post:
+      tags: [MySQL]
+      summary: Revoke privileges
+      operationId: mysqlRevokeUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MySQLGrantRequest'
+      responses:
+        '200':
+          description: Privileges revoked
+
+
+  /api/mysql/data:
+    get:
+      tags: [MySQL]
+      summary: Get table data
+      operationId: mysqlGetData
+      parameters:
+        - name: database
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: table
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+            maximum: 1000
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: order_by
+          in: query
+          schema:
+            type: string
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum: [ASC, DESC]
+            default: ASC
+      responses:
+        '200':
+          description: Table data
+
+    post:
+      tags: [MySQL]
+      summary: Insert record
+      operationId: mysqlInsertData
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MySQLDataRequest'
+      responses:
+        '200':
+          description: Record inserted
+
+    put:
+      tags: [MySQL]
+      summary: Update records
+      operationId: mysqlUpdateData
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MySQLUpdateRequest'
+      responses:
+        '200':
+          description: Records updated
+
+    delete:
+      tags: [MySQL]
+      summary: Delete records
+      operationId: mysqlDeleteData
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MySQLDeleteDataRequest'
+      responses:
+        '200':
+          description: Records deleted
+
+
 
 
   /api/mysql/start:
@@ -4116,3 +4398,208 @@ components:
     GenericResponse:
       type: object
       additionalProperties: true
+
+
+    MySQLStatus:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        status:
+          type: string
+          enum:
+            - running
+            - stopped
+        version:
+          type: string
+          nullable: true
+        error:
+          type: string
+          nullable: true
+
+
+    MySQLDatabaseRequest:
+      type: object
+      required:
+        - database
+      properties:
+        database:
+          type: string
+          example: kiosk
+
+
+    MySQLCreateTableRequest:
+      type: object
+      required:
+        - database
+        - table
+        - columns
+      properties:
+        database:
+          type: string
+          example: kiosk
+        table:
+          type: string
+          example: products
+        columns:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - type
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+                example: VARCHAR(255)
+              nullable:
+                type: boolean
+                default: true
+              primary:
+                type: boolean
+              auto_increment:
+                type: boolean
+              unique:
+                type: boolean
+              default:
+                nullable: true
+
+
+    MySQLDeleteTableRequest:
+      type: object
+      required:
+        - database
+        - table
+        - confirm
+      properties:
+        database:
+          type: string
+        table:
+          type: string
+        confirm:
+          type: string
+
+
+    MySQLCreateUserRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example: kiosk
+        host:
+          type: string
+          default: localhost
+        password:
+          type: string
+          format: password
+
+
+    MySQLDeleteUserRequest:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+        host:
+          type: string
+          default: localhost
+
+
+    MySQLGrantRequest:
+      type: object
+      required:
+        - username
+        - database
+        - privileges
+      properties:
+        username:
+          type: string
+        host:
+          type: string
+          default: localhost
+        database:
+          type: string
+        table:
+          type: string
+          default: '*'
+        privileges:
+          type: array
+          items:
+            type: string
+            enum:
+              - SELECT
+              - INSERT
+              - UPDATE
+              - DELETE
+              - CREATE
+              - DROP
+              - ALTER
+              - INDEX
+              - REFERENCES
+              - EXECUTE
+              - CREATE VIEW
+              - SHOW VIEW
+              - CREATE ROUTINE
+              - ALTER ROUTINE
+              - EVENT
+              - TRIGGER
+              - LOCK TABLES
+              - CREATE TEMPORARY TABLES
+
+
+    MySQLDataRequest:
+      type: object
+      required:
+        - database
+        - table
+        - data
+      properties:
+        database:
+          type: string
+        table:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+
+
+    MySQLUpdateRequest:
+      type: object
+      required:
+        - database
+        - table
+        - data
+        - where
+      properties:
+        database:
+          type: string
+        table:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+        where:
+          type: object
+          additionalProperties: true
+
+
+    MySQLDeleteDataRequest:
+      type: object
+      required:
+        - database
+        - table
+        - where
+      properties:
+        database:
+          type: string
+        table:
+          type: string
+        where:
+          type: object
+          additionalProperties: true
