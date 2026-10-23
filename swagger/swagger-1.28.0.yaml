@@ -2484,9 +2484,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
-              example:
-                ok: true
+                $ref: '#/components/schemas/TransactionFiscalResponse'
+
       parameters:
       - name: simulate_success
         in: query
@@ -2527,9 +2526,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
-              example:
-                ok: true
+                $ref: '#/components/schemas/TerminalTransactionResponse'
+
       parameters:
       - name: simulate_success
         in: query
@@ -4425,9 +4423,71 @@ components:
           type: string
           nullable: true
           example: INGENICO-LICENSE-UUID
+
     GenericResponse:
       type: object
-      additionalProperties: true
+      properties:
+        ok:
+          type: boolean
+
+    TransactionFiscalResponse:
+      type: "object"
+      allOf:
+        - $ref: '#/components/schemas/GenericResponse'
+      properties:
+        error:
+          type: "string"
+          example: ""
+        details:
+          type: "string"
+          example: ""
+        paragon:
+          type: "object"
+          properties:
+            "bc":
+              type: string
+              example: "112"
+            "bn":
+              type: string
+              example: "16"
+            "bt":
+              type: string
+              example: "256"
+            "code":
+              type: number
+              example: -1
+            "hn":
+              type: "string"
+              example: "525"
+            "message":
+              type: "string"
+              example: ""
+            "ok":
+              type: "boolean"
+              example: true
+            "took":
+              type: "number"
+              example: 2802
+            "ts":
+              type: "number"
+              example: 1792739088171
+            "tsend":
+              type: "number"
+              example: 1792739090973
+
+    TerminalTransactionResponse:
+      type: "object"
+      allOf:
+        - $ref: '#/components/schemas/GenericResponse'
+      properties:
+        error:
+          type: "string"
+        details:
+          type: "string"
+        paymentUUID:
+          type: "string"
+        message:
+          type: "string"
 
     TransactionPaymentTerminalResponse:
       type: "object"
