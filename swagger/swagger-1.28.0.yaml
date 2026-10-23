@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: KioskOS Backend API
-  version: '1.27.0'
+  version: '1.28.0'
   description: The API exposes kiosk
     configuration, hardware control, networking, audio/TTS, transactions, fiscal/terminal operations, Android TV control, file management, QR
     scanner events, licensing and reverse-support functionality. PosnetServer and IngenicoServer proxy subpaths are intentionally described as
@@ -2552,6 +2552,36 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/TerminalTransactionRequest'
+  /api/transaction-payment-terminal:
+    get:
+      tags:
+      - Transactions
+      summary: Return transaction details
+      description: Returns a transaction details from terminal.
+      operationId: transaction_payment_terminal_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionPaymentTerminalResponse'
+  /api/transaction-payment-other:
+    get:
+      tags:
+      - Transactions
+      summary: Return transaction details
+      description: Returns transaction details for a payment that was not processed by the terminal. For example, a kiosk may support additional payment methods such as BLIK, Paynow, PayPal, or cash. This method can be used to retrieve transaction details for payments made through any additionally registered payment sources.
+      operationId: transaction_payment_other_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionPaymentOtherResponse'
+      parameters:
+
   /api/reverse-proxy/open:
     post:
       tags:
@@ -4399,6 +4429,27 @@ components:
       type: object
       additionalProperties: true
 
+    TransactionPaymentTerminalResponse:
+      type: "object"
+      allOf:
+        - $ref: '#/components/schemas/GenericResponse'
+      properties:
+        payment:
+          type: "object"
+      example:
+        ok: true
+        payment: {}
+
+    TransactionPaymentOtherResponse:
+      type: "object"
+      allOf:
+        - $ref: '#/components/schemas/GenericResponse'
+      properties:
+        payment:
+          type: "object"
+      example:
+        ok: true
+        payment: {}
 
     MySQLStatus:
       type: object
