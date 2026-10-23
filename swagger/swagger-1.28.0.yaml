@@ -1781,9 +1781,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
-              example:
-                ok: true
+                $ref: '#/components/schemas/InternetStatusResponse'
+
   /api/screen-rotate:
     post:
       tags:
@@ -4429,6 +4428,31 @@ components:
       properties:
         ok:
           type: boolean
+
+    InternetStatusResponse:
+      type: object
+      properties:
+        eth0:
+          type: "string"
+          example: null
+          description: Ethernet IP
+        eth1:
+          type: "string"
+          description: GSM Modem IP
+          example: null
+        online:
+          type: "boolean"
+          description: Has internet access
+          example: true
+        routeby:
+          type: "string"
+          description: Default internet interface
+          example: "192.168.0.126"
+        wlan0:
+          type: "string"
+          description: WiFi IP
+          example: "192.168.0.126"
+
 
     TransactionFiscalResponse:
       type: "object"
