@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
   title: KioskOS Backend API
-  version: '1.28.0'
+  version: '1.29.0'
   description: The API exposes kiosk
     configuration, hardware control, networking, audio/TTS, transactions, fiscal/terminal operations, Android TV control, file management, QR
-    scanner events, licensing and reverse-support functionality. PosnetServer and IngenicoServer proxy subpaths are intentionally described as
+    scanner events, licensing and reverse-support functionality. PosnetServer, IngenicoServer and BocaTicketServer proxy subpaths are intentionally described as
     transparent downstream proxies because their detailed schemas are implemented by the downstream services.
 servers:
 - url: http://localhost:8080
@@ -24,6 +24,7 @@ tags:
 - name: PayNow
 - name: PosnetServer proxy
 - name: IngenicoServer proxy
+- name: BocaTicketServer proxy
 - name: Reverse proxy & support
 - name: Android TV
 - name: Files & resources
@@ -928,6 +929,195 @@ paths:
       summary: Ingenico proxy
       description: Transparent proxy for the local IngenicoServer service. The path after `/api/ingenicoserver/` is forwarded to IngenicoServer.
       operationId: ingenico_proxy_options
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+
+  /api/bocaserver/{path}:
+    get:
+      tags:
+      - BocaTicketServer proxy
+      summary: Boca Lemur proxy
+      description: Transparent proxy for the local BocaTicketServer service. The path after `/api/bocaserver/` is forwarded to BocaTicketServer.
+      operationId: boca_proxy_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    post:
+      tags:
+      - BocaTicketServer proxy
+      summary: Boca Lemur proxy
+      description: Transparent proxy for the local BocaTicketServer service. The path after `/api/bocaserver/` is forwarded to BocaTicketServer.
+      operationId: boca_proxy_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    put:
+      tags:
+      - BocaTicketServer proxy
+      summary: Boca Lemur proxy
+      description: Transparent proxy for the local BocaTicketServer service. The path after `/api/bocaserver/` is forwarded to BocaTicketServer.
+      operationId: boca_proxy_put
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    delete:
+      tags:
+      - BocaTicketServer proxy
+      summary: Boca Lemur proxy
+      description: Transparent proxy for the local BocaTicketServer service. The path after `/api/bocaserver/` is forwarded to BocaTicketServer.
+      operationId: boca_proxy_delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    patch:
+      tags:
+      - BocaTicketServer proxy
+      summary: Boca Lemur proxy
+      description: Transparent proxy for the local BocaTicketServer service. The path after `/api/bocaserver/` is forwarded to BocaTicketServer.
+      operationId: boca_proxy_patch
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        example: status
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+    options:
+      tags:
+      - BocaTicketServer proxy
+      summary: Boca Lemur proxy
+      description: Transparent proxy for the local BocaTicketServer service. The path after `/api/bocaserver/` is forwarded to BocaTicketServer.
+      operationId: boca_proxy_options
       responses:
         '200':
           description: Successful response
@@ -3468,6 +3658,34 @@ paths:
                 interface: eth0
                 connected: true
                 mac: AA:BB:CC:DD:EE:FF
+
+  /api/terminal-eth-discover:
+    post:
+      tags:
+      - Network
+      summary: Eth
+      description: Scan for terminals in local network.
+      operationId: eth_terminal_discover
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminalEthDiscoverRequest'
+      responses:
+        '200':
+          description: Status
+          content:
+            application/json:
+              example:
+                count: 2
+                ips:
+                    - "192.168.0.10"
+                    - "192.168.0.211"
+                ok: true
+                port: 5000
+                provider: "pep"
+
   /api/posnetserver/:
     get:
       tags:
@@ -4403,6 +4621,29 @@ components:
         path:
           type: string
           example: assets/new-folder
+
+    TerminalEthDiscoverRequest:
+      type: object
+      required:
+      - routeby
+      - provider
+      properties:
+        routeby:
+          type: string
+          example: "192.168.0.126"
+        provider:
+          type: string
+          example: "pep"
+          enum:
+            - "eservice"
+            - "itcard"
+            - "polcard"
+            - "elavon"
+            - "pep"
+        port:
+          type: string
+          example: "5000"
+
     QrScannerDeviceRequest:
       type: object
       required:
