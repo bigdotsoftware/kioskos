@@ -1973,6 +1973,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternetStatusResponse'
 
+  /api/display:
+    get:
+      tags:
+      - Display
+      summary: Connected monitors info
+      description: Returns information about connected monitors.
+      operationId: display_info_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisplayInfoResponse'
+              example:
+                {"connected":true,"count":1,"displays":[{"connected":true,"modes":[],"name":"HDMI-A-1","status":"connected"},{"connected":false,"modes":[],"name":"HDMI-A-2","status":"disconnected"}],"ok":true}
   /api/screen-rotate:
     post:
       tags:
@@ -4669,6 +4685,37 @@ components:
       properties:
         ok:
           type: boolean
+
+    DisplayInfoResponse:
+      type: object
+      properties:
+        connected:
+          type: boolean
+          example: true
+        count:
+          type: number
+          example: 1
+        displays:
+          type: array
+          items:
+            type: object
+            properties:
+              connected:
+                type: boolean
+                example: true
+              modes:
+                type: array
+                items:
+                  type: string
+              name:
+                type: string
+                example: "HDMI-A-1"
+              status:
+                type: string
+                example: "connected"
+        ok:
+          type: boolean
+          example: true
 
     InternetStatusResponse:
       type: object
