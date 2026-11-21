@@ -7,7 +7,7 @@ info:
     scanner events, licensing and reverse-support functionality. PosnetServer, IngenicoServer and BocaTicketServer proxy subpaths are intentionally described as
     transparent downstream proxies because their detailed schemas are implemented by the downstream services.
 servers:
-- url: http://localhost:8080
+- url: http://localhost:4100
   description: Kiosk backend API
 tags:
 - name: General
@@ -1988,7 +1988,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DisplayInfoResponse'
               example:
-                {"connected":true,"count":1,"displays":[{"connected":true,"modes":[],"name":"HDMI-A-1","status":"connected"},{"connected":false,"modes":[],"name":"HDMI-A-2","status":"disconnected"}],"ok":true}
+                {"connected":true,"count":1,"displays":[{"connected":true,"modes":["1920x1200", "1920x1200i","1920x1080i","1920x1080","1600x900","800x600","720x480","640x480"],"name":"card1-HDMI-A-1","status":"connected"},{"connected":false,"modes":[],"name":"card1-HDMI-A-2","status":"disconnected"}],"ok":true}
   /api/screen-rotate:
     post:
       tags:
