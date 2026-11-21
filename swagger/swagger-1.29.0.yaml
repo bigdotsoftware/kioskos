@@ -1989,6 +1989,91 @@ paths:
                 $ref: '#/components/schemas/DisplayInfoResponse'
               example:
                 {"connected":true,"count":1,"displays":[{"connected":true,"modes":["1920x1200", "1920x1200i","1920x1080i","1920x1080","1600x900","800x600","720x480","640x480"],"name":"card1-HDMI-A-1","status":"connected"},{"connected":false,"modes":[],"name":"card1-HDMI-A-2","status":"disconnected"}],"ok":true}
+  /api/display/test/screen-main.html:
+    get:
+      tags:
+      - Display
+      summary: Monitor 1 identification screen
+      description: Returns HTML for screen identification.
+      operationId: display_test_screen_main
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+
+  /api/display/test/screen-customer.html:
+    get:
+      tags:
+      - Display
+      summary: Monitor 2 identification screen
+      description: Returns HTML for screen identification.
+      operationId: display_test_screen_customer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+
+  /api/display/screen-detection/start:
+    post:
+      tags:
+      - Display
+      summary: Screens identification
+      description: Starts screen identification.
+      operationId: screen_detection_start_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisplayScreenDetecionStartResponse'
+              example:
+                ok: true
+                screens:
+                  main: 7777
+                  customer: 8888
+
+  /api/display/screen-detection/stop:
+    post:
+      tags:
+      - Display
+      summary: Screens identification
+      description: Stops screen identification.
+      operationId: screen_detection_stop_post
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+
+  /api/display/mode:
+    post:
+      tags:
+      - Display
+      summary: Screen mode
+      description: Sets screen mode
+      operationId: screen_mode_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisplayModeRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisplayModeResponse'
+
+
   /api/screen-rotate:
     post:
       tags:
@@ -4343,6 +4428,22 @@ components:
           items:
             type: object
       additionalProperties: true
+
+    DisplayModeRequest:
+      type: object
+      required:
+      - mode
+      properties:
+        primaryWidth:
+          type: number
+          example: 1920
+        mode:
+          type: string
+          enum:
+            - extend
+            - mirror
+          example: 'mirror'
+
     LoginRequest:
       type: object
       required:
@@ -4685,6 +4786,36 @@ components:
       properties:
         ok:
           type: boolean
+
+    DisplayModeResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: true
+        mode:
+          type: string
+          example: "mirror"
+        primary:
+          type: string
+          example: "HDMI-A-1"
+        secondary:
+          type: string
+          example: "HDMI-A-2"
+
+    DisplayScreenDetecionStartResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: true
+        screens:
+          type: object
+          properties:
+            main:
+              type: number
+            customer:
+              type: number
 
     DisplayInfoResponse:
       type: object
