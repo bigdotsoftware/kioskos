@@ -2052,6 +2052,29 @@ paths:
               example:
                 ok: true
 
+  /api/display/screen-restart/{screen}:
+    post:
+      tags:
+      - Display
+      summary: Screen restart
+      description: Screen restart.
+      operationId: screen_restart_post
+      parameters:
+        - name: screen
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                ok: true
+
   /api/display/mode:
     post:
       tags:
@@ -4786,6 +4809,8 @@ components:
       properties:
         ok:
           type: boolean
+        error:
+          type: string
 
     DisplayModeResponse:
       type: object
