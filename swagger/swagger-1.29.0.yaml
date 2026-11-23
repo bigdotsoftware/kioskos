@@ -1899,7 +1899,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AppSettingsRequest'
-  /api/show-website-settings:
+  /api/show-website-settings/{screen}:
     get:
       tags:
       - General
@@ -1916,11 +1916,12 @@ paths:
               example:
                 ok: true
       parameters:
-      - name: url
-        in: query
-        required: false
-        schema:
-          type: string
+        - name: screen
+          in: path
+          required: true
+          schema:
+            type: string
+
   /api/login:
     post:
       tags:
