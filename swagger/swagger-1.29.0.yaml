@@ -2076,6 +2076,40 @@ paths:
               example:
                 ok: true
 
+  /api/display/touch-devices:
+    post:
+      tags:
+      - Display
+      summary: Assign touch devices
+      description: Assign touch devices to screens
+      operationId: screen_touch_devices_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisplayTouchDevicesRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisplayTouchDevicesResponse'
+    get:
+      tags:
+      - Display
+      summary: Return touch devices
+      description: Return touch devices
+      operationId: screen_touch_devices_get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisplayTouchDevicesResponse'
+
   /api/display/mode:
     post:
       tags:
@@ -4453,6 +4487,19 @@ components:
             type: object
       additionalProperties: true
 
+    DisplayTouchDevicesRequest:
+      type: object
+      required:
+      - name
+      - output
+      properties:
+        name:
+          type: string
+          example: "wch.cn TouchScreen"
+        output:
+          type: string
+          example: "HDMI-A-2"
+
     DisplayModeRequest:
       type: object
       required:
@@ -4812,6 +4859,34 @@ components:
           type: boolean
         error:
           type: string
+
+    DisplayTouchDevicesResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: true
+        devices:
+          type: array
+          items:
+            type: object
+            properties:
+              ambiguous:
+                type: boolean
+                example: false
+              name:
+                type: string
+                example: "wch.cn TouchScreen"
+              path:
+                type: string
+                example: "/dev/input/event22"
+              outputs:
+                type: array
+                items:
+                  type: string
+                  example: "HDMI-A-2"
+
+
 
     DisplayModeResponse:
       type: object
